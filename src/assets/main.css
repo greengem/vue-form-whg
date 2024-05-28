@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  @apply min-h-dvh flex flex-col bg-gradient-to-br from-slate-800 to-slate-950;
+}
+body {
+  @apply flex flex-col grow;
+}
+#app {
+  @apply flex flex-col grow;
+}
