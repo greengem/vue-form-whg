@@ -10,10 +10,12 @@ import ja from './locales/ja.json'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
 import { FaExternalLinkAlt } from 'oh-vue-icons/icons'
 
+const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en' // Get the preferred language from localStorage
+
 // Configure i18n
 const i18n = createI18n({
   legacy: false, // Setting legacy to false for Composition API support
-  locale: 'en', // Default locale
+  locale: preferredLanguage, // Set the initial locale from localStorage if it exists
   fallbackLocale: 'en', // Fallback locale
   messages: {
     en,
