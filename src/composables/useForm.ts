@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia'
+// src/composables/useForm.ts
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-type ValidationRule = {
-  validator: (value: any) => boolean
+export type ValidationRule = {
+  validator: (value: any, form?: any) => boolean
   message: string
 }
 
-type FormState = {
+export type FormState = {
   name: string
   email: string
   password: string
@@ -17,15 +17,13 @@ type FormState = {
   terms: boolean
 }
 
-type ErrorState = {
+export type ErrorState = {
   [key in keyof FormState]: string
 }
 
-// Define a Pinia store named 'form'
-export const useFormStore = defineStore('form', () => {
+export function useForm() {
   const { t } = useI18n()
 
-  // Reactive state for the form data
   const form = reactive<FormState>({
     name: '',
     email: '',
@@ -36,7 +34,6 @@ export const useFormStore = defineStore('form', () => {
     terms: false
   })
 
-  // Reactive state for form error messages
   const errors = reactive<ErrorState>({
     name: '',
     email: '',
@@ -47,7 +44,6 @@ export const useFormStore = defineStore('form', () => {
     terms: ''
   })
 
-  // Validation rules configuration
   const validationRules: { [key in keyof FormState]: ValidationRule } = {
     name: {
       validator: (value) => value.length >= 2,
@@ -74,7 +70,7 @@ export const useFormStore = defineStore('form', () => {
       message: t('errors.service')
     },
     otherService: {
-      validator: (value) => form.service !== 'other' || value.length >= 2,
+      validator: (value, form) => form.service !== 'other' || value.length >= 2,
       message: t('errors.otherService')
     },
     terms: {
@@ -83,22 +79,19 @@ export const useFormStore = defineStore('form', () => {
     }
   }
 
-  // Reset all error messages
   const resetErrors = () => {
     Object.keys(errors).forEach((key) => {
       errors[key as keyof ErrorState] = ''
     })
   }
 
-  // Validate a specific field
   const validateField = (field: keyof FormState) => {
     if (validationRules[field]) {
       const { validator, message } = validationRules[field]
-      errors[field] = validator(form[field]) ? '' : message
+      errors[field] = validator(form[field], form) ? '' : message
     }
   }
 
-  // Validate the entire form
   const validateForm = () => {
     let valid = true
     resetErrors()
@@ -107,18 +100,14 @@ export const useFormStore = defineStore('form', () => {
       validateField(field as keyof FormState)
       if (errors[field as keyof ErrorState]) {
         valid = false
-        console.log(`Validation failed for field: ${field}`)
       }
     })
 
     return valid
   }
 
-  // Handle form submission
   const handleSubmit = () => {
-    console.log('Form Data:', JSON.parse(JSON.stringify(form)))
     if (validateForm()) {
-      console.log('Form submitted successfully!')
       Object.assign(form, {
         name: '',
         email: '',
@@ -137,4 +126,4 @@ export const useFormStore = defineStore('form', () => {
     handleSubmit,
     validateField
   }
-})
+}
