@@ -104,12 +104,11 @@
 </template>
 
 <script setup lang="ts">
-import { useFormStore } from '@/stores/formStore'
+import { useForm } from '@/composables/useForm'
 
 import FormFieldWrapper from '@/components/form/FormFieldWrapper.vue'
 import FormLabel from '@/components/form/FormLabel.vue'
 import FormError from '@/components/form/FormError.vue'
 
-const formStore = useFormStore()
-const { form, errors, handleSubmit, validateField } = formStore
+const { form, errors, handleSubmit, validateField } = useForm()
 </script>
