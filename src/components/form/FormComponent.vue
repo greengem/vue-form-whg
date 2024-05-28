@@ -3,6 +3,7 @@
     <FormFieldWrapper>
       <FormLabel forField="name">{{ $t('form.name') }}</FormLabel>
       <input
+        autofocus
         type="text"
         id="name"
         v-model="form.name"
@@ -78,14 +79,19 @@
     </FormFieldWrapper>
 
     <FormFieldWrapper>
-      <input
-        type="checkbox"
-        id="terms"
-        v-model="form.terms"
-        @blur="() => validateField('terms')"
-        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-      />
-      <FormLabel forField="terms">{{ $t('form.terms') }}</FormLabel>
+      <div class="flex items-center gap-x-2">
+        <input
+          type="checkbox"
+          id="terms"
+          v-model="form.terms"
+          @blur="() => validateField('terms')"
+          class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
+        />
+        <FormLabel forField="terms" class="mb-0">
+          {{ $t('form.terms') }}
+          <router-link to="/terms"><v-icon name="fa-external-link-alt" /></router-link>
+        </FormLabel>
+      </div>
       <FormError :error="errors.terms ? $t('errors.terms') : null" />
     </FormFieldWrapper>
 
