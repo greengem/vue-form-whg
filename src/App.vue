@@ -1,8 +1,7 @@
-<script setup lang="ts">
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <LanguageSwitcher />
-  <RouterView />
+  <main class="flex flex-col grow items-center justify-center p-3 md:p-5">
+    <RouterView />
+  </main>
 </template>
