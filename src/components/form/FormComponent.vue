@@ -8,7 +8,7 @@
         v-model="form.name"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       />
-      <FormError :error="errors.name || ''" />
+      <FormError :error="errors.name ? $t('errors.name') : null" />
     </FormFieldWrapper>
 
     <div class="flex">

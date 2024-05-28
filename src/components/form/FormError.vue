@@ -5,7 +5,5 @@
 </template>
 
 <script setup lang="ts">
-const { error } = defineProps({
-  error: String
-})
+const { error } = defineProps<{ error: string | null }>()
 </script>
