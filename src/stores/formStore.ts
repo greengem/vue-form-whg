@@ -39,37 +39,54 @@ export const useFormStore = defineStore('form', () => {
     errors.terms = ''
   }
 
-  // Validate the form data
+  // Individual field validation functions
+  const validateName = () => {
+    errors.name = form.name.length >= 2 ? '' : t('errors.name')
+  }
+
+  const validateEmail = () => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    errors.email = emailRegex.test(form.email) ? '' : t('errors.email')
+  }
+
+  const validatePassword = () => {
+    const passwordRegex = /^(?=.*[0-9]).{8,}$/
+    errors.password = passwordRegex.test(form.password) ? '' : t('errors.password')
+  }
+
+  const validateDob = () => {
+    const dobDate = new Date(form.dob)
+    const currentDate = new Date()
+    errors.dob = form.dob && dobDate < currentDate ? '' : t('errors.dob')
+  }
+
+  const validateService = () => {
+    errors.service = form.service ? '' : t('errors.service')
+  }
+
+  const validateOtherService = () => {
+    if (form.service === 'other') {
+      errors.otherService = form.otherService.length >= 2 ? '' : t('errors.otherService')
+    }
+  }
+
+  const validateTerms = () => {
+    errors.terms = form.terms ? '' : t('errors.terms')
+  }
+
+  // Validate the entire form
   const validateForm = () => {
     let valid = true
     resetErrors()
 
-    // Name validation: must be at least 2 characters long
-    errors.name = form.name.length >= 2 ? '' : t('errors.name')
-
-    // Email validation: must match a standard email pattern
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    errors.email = emailRegex.test(form.email) ? '' : t('errors.email')
-
-    // Password validation: must be at least 8 characters long and contain at least one number
-    const passwordRegex = /^(?=.*[0-9]).{8,}$/
-    errors.password = passwordRegex.test(form.password) ? '' : t('errors.password')
-
-    // Date of birth validation: must be a past date
-    const dobDate = new Date(form.dob)
-    const currentDate = new Date()
-    errors.dob = form.dob && dobDate < currentDate ? '' : t('errors.dob')
-
-    // Service selection validation: must select a service
-    errors.service = form.service ? '' : t('errors.service')
-
-    // Other service validation: if 'Other' is selected, the input must be at least 2 characters long
-    if (form.service === 'other') {
-      errors.otherService = form.otherService.length >= 2 ? '' : t('errors.otherService')
-    }
-
-    // Terms and conditions validation: must be accepted
-    errors.terms = form.terms ? '' : t('errors.terms')
+    // Validate all fields
+    validateName()
+    validateEmail()
+    validatePassword()
+    validateDob()
+    validateService()
+    validateOtherService()
+    validateTerms()
 
     // Check for any errors and log validation failures
     Object.keys(errors).forEach((key) => {
@@ -99,5 +116,16 @@ export const useFormStore = defineStore('form', () => {
     }
   }
 
-  return { form, errors, handleSubmit }
+  return {
+    form,
+    errors,
+    handleSubmit,
+    validateName,
+    validateEmail,
+    validatePassword,
+    validateDob,
+    validateService,
+    validateOtherService,
+    validateTerms
+  }
 })

@@ -6,6 +6,7 @@
         type="text"
         id="name"
         v-model="form.name"
+        @blur="validateName"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       />
       <FormError :error="errors.name ? $t('errors.name') : null" />
@@ -17,6 +18,7 @@
         type="email"
         id="email"
         v-model="form.email"
+        @blur="validateEmail"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       />
       <FormError :error="errors.email ? $t('errors.email') : null" />
@@ -28,6 +30,7 @@
         type="password"
         id="password"
         v-model="form.password"
+        @blur="validatePassword"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       />
       <FormError :error="errors.password ? $t('errors.password') : null" />
@@ -39,6 +42,7 @@
         type="date"
         id="dob"
         v-model="form.dob"
+        @blur="validateDob"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       />
       <FormError :error="errors.dob ? $t('errors.dob') : null" />
@@ -49,6 +53,7 @@
       <select
         id="service"
         v-model="form.service"
+        @blur="validateService"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       >
         <option value="" disabled>{{ $t('form.serviceOptions.choose') }}</option>
@@ -66,6 +71,7 @@
         type="text"
         id="otherService"
         v-model="form.otherService"
+        @blur="validateOtherService"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       />
       <FormError :error="errors.otherService ? $t('errors.otherService') : null" />
@@ -76,6 +82,7 @@
         type="checkbox"
         id="terms"
         v-model="form.terms"
+        @blur="validateTerms"
         class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
       />
       <FormLabel forField="terms">{{ $t('form.terms') }}</FormLabel>
@@ -98,5 +105,16 @@ import FormLabel from '@/components/form/FormLabel.vue'
 import FormError from '@/components/form/FormError.vue'
 
 const formStore = useFormStore()
-const { form, errors, handleSubmit } = formStore
+const {
+  form,
+  errors,
+  handleSubmit,
+  validateName,
+  validateEmail,
+  validatePassword,
+  validateDob,
+  validateService,
+  validateOtherService,
+  validateTerms
+} = formStore
 </script>
