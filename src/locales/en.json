@@ -1,0 +1,30 @@
+{
+  "form": {
+    "formTitle": "Dynamic Form",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "dob": "Date of Birth",
+    "service": "Choice of Service",
+    "otherService": "Specify Service",
+    "terms": "I agree to the terms and conditions.",
+    "submit": "Submit",
+    "serviceOptions": {
+      "choose": "Choose a service",
+      "webDevelopment": "Web Development",
+      "mobileDevelopment": "Mobile Development",
+      "seoServices": "SEO Services",
+      "other": "Other"
+    }
+  },
+  "errors": {
+    "name": "Name must be at least 2 characters long.",
+    "email": "Invalid email format.",
+    "password": "Password must be at least 8 characters long and contain at least one number.",
+    "dob": "Date of birth must be a past date.",
+    "service": "Please select a valid service.",
+    "otherService": "Please specify the service.",
+    "terms": "You must agree to the terms and conditions."
+  },
+  "successMessage": "Form submitted successfully!"
+}

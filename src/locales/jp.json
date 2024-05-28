@@ -1,0 +1,30 @@
+{
+  "form": {
+    "formTitle": "動的フォーム",
+    "name": "名前",
+    "email": "メール",
+    "password": "パスワード",
+    "dob": "生年月日",
+    "service": "サービスの選択",
+    "otherService": "サービスを指定",
+    "terms": "利用規約に同意します。",
+    "submit": "送信",
+    "serviceOptions": {
+      "choose": "サービスを選択",
+      "webDevelopment": "ウェブ開発",
+      "mobileDevelopment": "モバイル開発",
+      "seoServices": "SEOサービス",
+      "other": "その他"
+    }
+  },
+  "errors": {
+    "name": "名前は2文字以上でなければなりません。",
+    "email": "無効なメール形式です。",
+    "password": "パスワードは8文字以上で、少なくとも1つの数字を含める必要があります。",
+    "dob": "生年月日は過去の日付でなければなりません。",
+    "service": "有効なサービスを選択してください。",
+    "otherService": "サービスを指定してください。",
+    "terms": "利用規約に同意する必要があります。"
+  },
+  "successMessage": "フォームが正常に送信されました！"
+}

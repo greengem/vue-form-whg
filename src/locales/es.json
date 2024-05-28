@@ -1,0 +1,30 @@
+{
+  "form": {
+    "formTitle": "Formulario Dinámico",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "dob": "Fecha de Nacimiento",
+    "service": "Elección de Servicio",
+    "otherService": "Especificar Servicio",
+    "terms": "Acepto los términos y condiciones.",
+    "submit": "Enviar",
+    "serviceOptions": {
+      "choose": "Elija un servicio",
+      "webDevelopment": "Desarrollo Web",
+      "mobileDevelopment": "Desarrollo Móvil",
+      "seoServices": "Servicios SEO",
+      "other": "Otro"
+    }
+  },
+  "errors": {
+    "name": "El nombre debe tener al menos 2 caracteres.",
+    "email": "Formato de correo electrónico inválido.",
+    "password": "La contraseña debe tener al menos 8 caracteres y contener al menos un número.",
+    "dob": "La fecha de nacimiento debe ser una fecha pasada.",
+    "service": "Por favor seleccione un servicio válido.",
+    "otherService": "Por favor, especifique el servicio.",
+    "terms": "Debe aceptar los términos y condiciones."
+  },
+  "successMessage": "¡Formulario enviado con éxito!"
+}
