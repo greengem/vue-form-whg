@@ -11,6 +11,77 @@
       <FormError :error="errors.name ? $t('errors.name') : null" />
     </FormFieldWrapper>
 
+    <FormFieldWrapper>
+      <FormLabel forField="email">{{ $t('form.email') }}</FormLabel>
+      <input
+        type="email"
+        id="email"
+        v-model="form.email"
+        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
+      />
+      <FormError :error="errors.email ? $t('errors.email') : null" />
+    </FormFieldWrapper>
+
+    <FormFieldWrapper>
+      <FormLabel forField="password">{{ $t('form.password') }}</FormLabel>
+      <input
+        type="password"
+        id="password"
+        v-model="form.password"
+        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
+      />
+      <FormError :error="errors.password ? $t('errors.password') : null" />
+    </FormFieldWrapper>
+
+    <FormFieldWrapper>
+      <FormLabel forField="dob">{{ $t('form.dob') }}</FormLabel>
+      <input
+        type="date"
+        id="dob"
+        v-model="form.dob"
+        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
+      />
+      <FormError :error="errors.dob ? $t('errors.dob') : null" />
+    </FormFieldWrapper>
+
+    <FormFieldWrapper>
+      <FormLabel forField="service">{{ $t('form.service') }}</FormLabel>
+      <select
+        id="service"
+        v-model="form.service"
+        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
+      >
+        <option value="" disabled>{{ $t('form.serviceOptions.choose') }}</option>
+        <option value="webDevelopment">{{ $t('form.serviceOptions.webDevelopment') }}</option>
+        <option value="mobileDevelopment">{{ $t('form.serviceOptions.mobileDevelopment') }}</option>
+        <option value="seoServices">{{ $t('form.serviceOptions.seoServices') }}</option>
+        <option value="other">{{ $t('form.serviceOptions.other') }}</option>
+      </select>
+      <FormError :error="errors.service ? $t('errors.service') : null" />
+    </FormFieldWrapper>
+
+    <FormFieldWrapper v-if="form.service === 'other'">
+      <FormLabel forField="otherService">{{ $t('form.otherService') }}</FormLabel>
+      <input
+        type="text"
+        id="otherService"
+        v-model="form.otherService"
+        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
+      />
+      <FormError :error="errors.otherService ? $t('errors.otherService') : null" />
+    </FormFieldWrapper>
+
+    <FormFieldWrapper>
+      <input
+        type="checkbox"
+        id="terms"
+        v-model="form.terms"
+        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
+      />
+      <FormLabel forField="terms">{{ $t('form.terms') }}</FormLabel>
+      <FormError :error="errors.terms ? $t('errors.terms') : null" />
+    </FormFieldWrapper>
+
     <div class="flex">
       <button type="submit" class="py-2 px-4 bg-slate-700 rounded-md shadow-md text-slate-50">
         {{ $t('form.submit') }}
