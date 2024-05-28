@@ -23,7 +23,7 @@
     "password": "La contraseña debe tener al menos 8 caracteres y contener al menos un número.",
     "dob": "La fecha de nacimiento debe ser una fecha pasada.",
     "service": "Por favor seleccione un servicio válido.",
-    "otherService": "Por favor, especifique el servicio.",
+    "otherService": "Por favor, especifique el servicio (al menos 2 caracteres).",
     "terms": "Debe aceptar los términos y condiciones."
   },
   "successMessage": "¡Formulario enviado con éxito!"

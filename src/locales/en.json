@@ -23,7 +23,7 @@
     "password": "Password must be at least 8 characters long and contain at least one number.",
     "dob": "Date of birth must be a past date.",
     "service": "Please select a valid service.",
-    "otherService": "Please specify the service.",
+    "otherService": "Please specify the service (at least 2 characters).",
     "terms": "You must agree to the terms and conditions."
   },
   "successMessage": "Form submitted successfully!"
