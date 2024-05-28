@@ -1,5 +1,6 @@
 // src/composables/useForm.ts
-import { reactive } from 'vue'
+
+import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export type ValidationRule = {
@@ -43,6 +44,8 @@ export function useForm() {
     otherService: '',
     terms: ''
   })
+
+  const isSuccess = ref(false)
 
   const validationRules: { [key in keyof FormState]: ValidationRule } = {
     name: {
@@ -108,6 +111,7 @@ export function useForm() {
 
   const handleSubmit = () => {
     if (validateForm()) {
+      isSuccess.value = true
       Object.assign(form, {
         name: '',
         email: '',
@@ -123,6 +127,7 @@ export function useForm() {
   return {
     form,
     errors,
+    isSuccess,
     handleSubmit,
     validateField
   }

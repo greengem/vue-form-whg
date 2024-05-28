@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSubmit" novalidate="true" class="flex flex-col gap-y-3">
+  <form @submit.prevent="handleSubmit" novalidate class="flex flex-col gap-y-3">
     <FormFieldWrapper>
       <FormLabel forField="name">{{ $t('form.name') }}</FormLabel>
       <input
@@ -100,6 +100,10 @@
         {{ $t('form.submit') }}
       </button>
     </div>
+
+    <div v-show="isSuccess" class="text-green-500">
+      {{ $t('successMessage') }}
+    </div>
   </form>
 </template>
 
@@ -110,5 +114,5 @@ import FormFieldWrapper from '@/components/form/FormFieldWrapper.vue'
 import FormLabel from '@/components/form/FormLabel.vue'
 import FormError from '@/components/form/FormError.vue'
 
-const { form, errors, handleSubmit, validateField } = useForm()
+const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
 </script>
