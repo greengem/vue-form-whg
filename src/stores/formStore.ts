@@ -2,12 +2,31 @@ import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+type ValidationRule = {
+  validator: (value: any) => boolean
+  message: string
+}
+
+type FormState = {
+  name: string
+  email: string
+  password: string
+  dob: string
+  service: string
+  otherService: string
+  terms: boolean
+}
+
+type ErrorState = {
+  [key in keyof FormState]: string
+}
+
 // Define a Pinia store named 'form'
 export const useFormStore = defineStore('form', () => {
   const { t } = useI18n()
 
   // Reactive state for the form data
-  const form = reactive({
+  const form = reactive<FormState>({
     name: '',
     email: '',
     password: '',
@@ -18,7 +37,7 @@ export const useFormStore = defineStore('form', () => {
   })
 
   // Reactive state for form error messages
-  const errors = reactive({
+  const errors = reactive<ErrorState>({
     name: '',
     email: '',
     password: '',
@@ -28,50 +47,55 @@ export const useFormStore = defineStore('form', () => {
     terms: ''
   })
 
-  // Reset all error messages
-  const resetErrors = () => {
-    errors.name = ''
-    errors.email = ''
-    errors.password = ''
-    errors.dob = ''
-    errors.service = ''
-    errors.otherService = ''
-    errors.terms = ''
-  }
-
-  // Individual field validation functions
-  const validateName = () => {
-    errors.name = form.name.length >= 2 ? '' : t('errors.name')
-  }
-
-  const validateEmail = () => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    errors.email = emailRegex.test(form.email) ? '' : t('errors.email')
-  }
-
-  const validatePassword = () => {
-    const passwordRegex = /^(?=.*[0-9]).{8,}$/
-    errors.password = passwordRegex.test(form.password) ? '' : t('errors.password')
-  }
-
-  const validateDob = () => {
-    const dobDate = new Date(form.dob)
-    const currentDate = new Date()
-    errors.dob = form.dob && dobDate < currentDate ? '' : t('errors.dob')
-  }
-
-  const validateService = () => {
-    errors.service = form.service ? '' : t('errors.service')
-  }
-
-  const validateOtherService = () => {
-    if (form.service === 'other') {
-      errors.otherService = form.otherService.length >= 2 ? '' : t('errors.otherService')
+  // Validation rules configuration
+  const validationRules: { [key in keyof FormState]: ValidationRule } = {
+    name: {
+      validator: (value) => value.length >= 2,
+      message: t('errors.name')
+    },
+    email: {
+      validator: (value) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
+      message: t('errors.email')
+    },
+    password: {
+      validator: (value) => /^(?=.*[0-9]).{8,}$/.test(value),
+      message: t('errors.password')
+    },
+    dob: {
+      validator: (value) => {
+        const dobDate = new Date(value)
+        const currentDate = new Date()
+        return value && dobDate < currentDate
+      },
+      message: t('errors.dob')
+    },
+    service: {
+      validator: (value) => !!value,
+      message: t('errors.service')
+    },
+    otherService: {
+      validator: (value) => form.service !== 'other' || value.length >= 2,
+      message: t('errors.otherService')
+    },
+    terms: {
+      validator: (value) => !!value,
+      message: t('errors.terms')
     }
   }
 
-  const validateTerms = () => {
-    errors.terms = form.terms ? '' : t('errors.terms')
+  // Reset all error messages
+  const resetErrors = () => {
+    Object.keys(errors).forEach((key) => {
+      errors[key as keyof ErrorState] = ''
+    })
+  }
+
+  // Validate a specific field
+  const validateField = (field: keyof FormState) => {
+    if (validationRules[field]) {
+      const { validator, message } = validationRules[field]
+      errors[field] = validator(form[field]) ? '' : message
+    }
   }
 
   // Validate the entire form
@@ -79,20 +103,11 @@ export const useFormStore = defineStore('form', () => {
     let valid = true
     resetErrors()
 
-    // Validate all fields
-    validateName()
-    validateEmail()
-    validatePassword()
-    validateDob()
-    validateService()
-    validateOtherService()
-    validateTerms()
-
-    // Check for any errors and log validation failures
-    Object.keys(errors).forEach((key) => {
-      if (errors[key as keyof typeof errors]) {
+    Object.keys(validationRules).forEach((field) => {
+      validateField(field as keyof FormState)
+      if (errors[field as keyof ErrorState]) {
         valid = false
-        console.log(`Validation failed for field: ${key}`)
+        console.log(`Validation failed for field: ${field}`)
       }
     })
 
@@ -120,12 +135,6 @@ export const useFormStore = defineStore('form', () => {
     form,
     errors,
     handleSubmit,
-    validateName,
-    validateEmail,
-    validatePassword,
-    validateDob,
-    validateService,
-    validateOtherService,
-    validateTerms
+    validateField
   }
 })
