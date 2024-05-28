@@ -2,58 +2,102 @@ import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-// Defining a Pinia store named 'form'
+// Define a Pinia store named 'form'
 export const useFormStore = defineStore('form', () => {
-  // Extracting the translation function from vue-i18n
   const { t } = useI18n()
 
   // Reactive state for the form data
   const form = reactive({
-    name: '' // Initial value for the name field
+    name: '',
+    email: '',
+    password: '',
+    dob: '',
+    service: '',
+    otherService: '',
+    terms: false
   })
 
   // Reactive state for form error messages
   const errors = reactive({
-    name: '' // Initial value for the name error message
+    name: '',
+    email: '',
+    password: '',
+    dob: '',
+    service: '',
+    otherService: '',
+    terms: ''
   })
 
-  // Function to reset error messages
+  // Reset all error messages
   const resetErrors = () => {
-    errors.name = '' // Clearing the error message for the name field
+    errors.name = ''
+    errors.email = ''
+    errors.password = ''
+    errors.dob = ''
+    errors.service = ''
+    errors.otherService = ''
+    errors.terms = ''
   }
 
-  // Function to validate the form data
+  // Validate the form data
   const validateForm = () => {
-    let valid = true // Flag to track form validity
-    resetErrors() // Reset any previous error messages
+    let valid = true
+    resetErrors()
 
-    // Validate the name field and set error messages accordingly
-    errors.name = form.name.length >= 2 ? '' : t('errors.name') // Name must be at least 2 characters
+    // Name validation: must be at least 2 characters long
+    errors.name = form.name.length >= 2 ? '' : t('errors.name')
 
-    // Check if there are any error messages and set valid to false if any
+    // Email validation: must match a standard email pattern
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    errors.email = emailRegex.test(form.email) ? '' : t('errors.email')
+
+    // Password validation: must be at least 8 characters long and contain at least one number
+    const passwordRegex = /^(?=.*[0-9]).{8,}$/
+    errors.password = passwordRegex.test(form.password) ? '' : t('errors.password')
+
+    // Date of birth validation: must be a past date
+    const dobDate = new Date(form.dob)
+    const currentDate = new Date()
+    errors.dob = form.dob && dobDate < currentDate ? '' : t('errors.dob')
+
+    // Service selection validation: must select a service
+    errors.service = form.service ? '' : t('errors.service')
+
+    // Other service validation: if 'Other' is selected, the input must be at least 2 characters long
+    if (form.service === 'other') {
+      errors.otherService = form.otherService.length >= 2 ? '' : t('errors.otherService')
+    }
+
+    // Terms and conditions validation: must be accepted
+    errors.terms = form.terms ? '' : t('errors.terms')
+
+    // Check for any errors and log validation failures
     Object.keys(errors).forEach((key) => {
       if (errors[key as keyof typeof errors]) {
-        // If there's an error message
-        valid = false // Set the form validity to false
-        console.log(`Validation failed for field: ${key}`) // Log the field that failed validation
+        valid = false
+        console.log(`Validation failed for field: ${key}`)
       }
     })
 
-    return valid // Return the overall form validity
+    return valid
   }
 
-  // Function to handle form submission
+  // Handle form submission
   const handleSubmit = () => {
-    console.log('Form Data:', JSON.parse(JSON.stringify(form))) // Logging form data to the console
+    console.log('Form Data:', JSON.parse(JSON.stringify(form)))
     if (validateForm()) {
-      // If the form is valid
-      console.log('Form submitted successfully!') // Log a success message
+      console.log('Form submitted successfully!')
       Object.assign(form, {
-        name: '' // Reset the form field
+        name: '',
+        email: '',
+        password: '',
+        dob: '',
+        service: '',
+        otherService: '',
+        terms: false
       })
     }
   }
 
-  // Returning the reactive states and functions to be used in components
   return { form, errors, handleSubmit }
 })
