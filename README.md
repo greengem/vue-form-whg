@@ -1,5 +1,11 @@
 # WHG Vue Technical Test
 
+<p float="left">
+  <img src="public/screenshots/desktop-dark.webp" width="300" />
+  <img src="public/screenshots/desktop-light.webp" width="300" /> 
+  <img src="public/screenshots/mobile.webp" width="300" /> 
+</p>
+
 ## Project Overview
 
 This project is a dynamic form built with Vue.js that includes validation, progressive disclosure, and internationalization (i18n). The form is designed to capture user information with various input types and enforce validation rules. Additionally, it supports responsive design, dark mode, and comprehensive testing.
