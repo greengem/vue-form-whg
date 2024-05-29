@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n' // Importing the 'useI18n' function from vue-i18n for internationalization
+
 // Defining the props that the component accepts
 const props = defineProps({
   label: {
@@ -18,6 +20,9 @@ const props = defineProps({
 // Defining the 'click' event that this component can emit
 const emit = defineEmits(['click'])
 
+// Using the i18n plugin to get the translation function
+const { t } = useI18n()
+
 // Defining a handler function for the 'click' event
 const handleClick = (event: Event) => {
   emit('click', event) // Emitting the 'click' event with the event object
@@ -28,7 +33,9 @@ const buttonClass = props.class
 </script>
 
 <template>
-  <button :type="type" :class="buttonClass" @click="handleClick">
-    {{ label }}
-  </button>
+  <div class="flex">
+    <button :type="type" :class="buttonClass" @click="handleClick">
+      {{ t(label) }}
+    </button>
+  </div>
 </template>
