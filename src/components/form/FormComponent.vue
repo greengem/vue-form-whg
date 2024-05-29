@@ -1,118 +1,93 @@
-<template>
-  <form @submit.prevent="handleSubmit" novalidate class="flex flex-col gap-y-3">
-    <FormFieldWrapper>
-      <FormLabel forField="name">{{ $t('form.name') }}</FormLabel>
-      <input
-        autofocus
-        type="text"
-        id="name"
-        v-model="form.name"
-        @blur="() => validateField('name')"
-        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-      />
-      <FormError :error="errors.name ? $t('errors.name') : null" />
-    </FormFieldWrapper>
-
-    <FormFieldWrapper>
-      <FormLabel forField="email">{{ $t('form.email') }}</FormLabel>
-      <input
-        type="email"
-        id="email"
-        v-model="form.email"
-        @blur="() => validateField('email')"
-        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-      />
-      <FormError :error="errors.email ? $t('errors.email') : null" />
-    </FormFieldWrapper>
-
-    <FormFieldWrapper>
-      <FormLabel forField="password">{{ $t('form.password') }}</FormLabel>
-      <input
-        type="password"
-        id="password"
-        v-model="form.password"
-        @blur="() => validateField('password')"
-        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-      />
-      <FormError :error="errors.password ? $t('errors.password') : null" />
-    </FormFieldWrapper>
-
-    <FormFieldWrapper>
-      <FormLabel forField="dob">{{ $t('form.dob') }}</FormLabel>
-      <input
-        type="date"
-        id="dob"
-        v-model="form.dob"
-        @blur="() => validateField('dob')"
-        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-      />
-      <FormError :error="errors.dob ? $t('errors.dob') : null" />
-    </FormFieldWrapper>
-
-    <FormFieldWrapper>
-      <FormLabel forField="service">{{ $t('form.service') }}</FormLabel>
-      <select
-        id="service"
-        v-model="form.service"
-        @blur="() => validateField('service')"
-        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-      >
-        <option value="" disabled>{{ $t('form.serviceOptions.choose') }}</option>
-        <option value="webDevelopment">{{ $t('form.serviceOptions.webDevelopment') }}</option>
-        <option value="mobileDevelopment">{{ $t('form.serviceOptions.mobileDevelopment') }}</option>
-        <option value="seoServices">{{ $t('form.serviceOptions.seoServices') }}</option>
-        <option value="other">{{ $t('form.serviceOptions.other') }}</option>
-      </select>
-      <FormError :error="errors.service ? $t('errors.service') : null" />
-    </FormFieldWrapper>
-
-    <FormFieldWrapper v-if="form.service === 'other'">
-      <FormLabel forField="otherService">{{ $t('form.otherService') }}</FormLabel>
-      <input
-        type="text"
-        id="otherService"
-        v-model="form.otherService"
-        @blur="() => validateField('otherService')"
-        class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-      />
-      <FormError :error="errors.otherService ? $t('errors.otherService') : null" />
-    </FormFieldWrapper>
-
-    <FormFieldWrapper>
-      <div class="flex items-center gap-x-2">
-        <input
-          type="checkbox"
-          id="terms"
-          v-model="form.terms"
-          @blur="() => validateField('terms')"
-          class="px-3 py-2 rounded-lg bg-slate-800 text-slate-100 shadow-md"
-        />
-        <FormLabel forField="terms" class="mb-0">
-          {{ $t('form.terms') }}
-          <router-link to="/terms"><v-icon name="fa-external-link-alt" /></router-link>
-        </FormLabel>
-      </div>
-      <FormError :error="errors.terms ? $t('errors.terms') : null" />
-    </FormFieldWrapper>
-
-    <div class="flex">
-      <button type="submit" class="py-2 px-4 bg-slate-700 rounded-md shadow-md text-slate-50">
-        {{ $t('form.submit') }}
-      </button>
-    </div>
-
-    <div v-show="isSuccess" class="text-green-500">
-      {{ $t('successMessage') }}
-    </div>
-  </form>
-</template>
-
 <script setup lang="ts">
+import FormInput from '@/components/form/fields/FormInput.vue'
+import FormSelect from '@/components/form/fields/FormSelect.vue'
+import FormCheckbox from '@/components/form/fields/FormCheckbox.vue'
+import FormButton from '@/components/form/fields/FormButton.vue'
+import FormSuccess from '@/components/form/FormSuccess.vue'
+
 import { useForm } from '@/composables/useForm'
-
-import FormFieldWrapper from '@/components/form/FormFieldWrapper.vue'
-import FormLabel from '@/components/form/FormLabel.vue'
-import FormError from '@/components/form/FormError.vue'
-
 const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
 </script>
+
+<template>
+  <form @submit.prevent="handleSubmit" novalidate class="flex flex-col gap-y-3">
+    <FormInput
+      id="name"
+      label="form.name"
+      v-model="form.name"
+      :error="errors.name ? 'errors.name' : undefined"
+      required
+      autofocus
+      @blur="validateField"
+    />
+
+    <FormInput
+      id="email"
+      label="form.email"
+      type="email"
+      v-model="form.email"
+      :error="errors.email ? 'errors.email' : undefined"
+      required
+      @blur="validateField"
+    />
+
+    <FormInput
+      id="password"
+      label="form.password"
+      type="password"
+      v-model="form.password"
+      :error="errors.password ? 'errors.password' : undefined"
+      required
+      @blur="validateField"
+    />
+
+    <FormInput
+      id="dob"
+      label="form.dob"
+      type="date"
+      v-model="form.dob"
+      :error="errors.dob ? 'errors.dob' : undefined"
+      required
+      @blur="validateField"
+    />
+
+    <FormSelect
+      id="service"
+      label="form.service"
+      v-model="form.service"
+      :error="errors.service ? 'errors.service' : undefined"
+      :options="[
+        { value: 'webDevelopment', label: 'form.serviceOptions.webDevelopment' },
+        { value: 'mobileDevelopment', label: 'form.serviceOptions.mobileDevelopment' },
+        { value: 'seoServices', label: 'form.serviceOptions.seoServices' },
+        { value: 'other', label: 'form.serviceOptions.other' }
+      ]"
+      required
+      @blur="validateField"
+    />
+
+    <FormInput
+      v-if="form.service === 'other'"
+      id="otherService"
+      label="form.otherService"
+      v-model="form.otherService"
+      :error="errors.otherService ? 'errors.otherService' : undefined"
+      @blur="validateField"
+    />
+
+    <FormCheckbox
+      id="terms"
+      label="form.terms"
+      v-model="form.terms"
+      :error="errors.terms ? 'errors.terms' : undefined"
+      link="/terms"
+      @blur="validateField"
+    />
+
+    <FormButton type="submit" label="form.submit" />
+
+    <FormSuccess v-show="isSuccess">
+      {{ $t('successMessage') }}
+    </FormSuccess>
+  </form>
+</template>
