@@ -8,7 +8,7 @@ import en from './locales/en.json'
 import es from './locales/es.json'
 import ja from './locales/ja.json'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { FaExternalLinkAlt } from 'oh-vue-icons/icons'
+import { FaExternalLinkAlt, FaSun, FaMoon, FaAdjust } from 'oh-vue-icons/icons'
 
 const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en' // Get the preferred language from localStorage
 
@@ -25,7 +25,7 @@ const i18n = createI18n({
 })
 
 // Add icons
-addIcons(FaExternalLinkAlt)
+addIcons(FaExternalLinkAlt, FaSun, FaMoon, FaAdjust)
 
 const app = createApp(App)
 
