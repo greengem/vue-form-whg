@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import FormFieldWrapper from '@/components/form/FormFieldWrapper.vue'
-import FormLabel from '@/components/form/FormLabel.vue'
-import FormError from '@/components/form/FormError.vue'
+import FormFieldWrapper from '@/components/form/fields/FormFieldWrapper.vue'
+import FormLabel from '@/components/form/fields/FormLabel.vue'
+import FormError from '@/components/form/fields/FormError.vue'
 
 // Define an interface for the options in the select field
 interface Option {
