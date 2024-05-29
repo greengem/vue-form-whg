@@ -3,7 +3,7 @@
     <select
       v-model="selectedLocale"
       @change="changeLocale"
-      class="text-sm w-14 px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 dark:text-slate-100 shadow-md ring-1 ring-slate-300 dark:ring-slate-700 appearance-none"
+      class="text-sm w-14 px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 dark:text-slate-100 shadow-md ring-1 ring-slate-300 dark:ring-slate-700 appearance-none pointer-events-none"
     >
       <option v-for="locale in availableLocales" :key="`locale-${locale}`" :value="locale">
         {{ locale }}
