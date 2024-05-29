@@ -17,7 +17,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       v-model="form.name"
       :error="errors.name ? 'errors.name' : undefined"
       required
-      @blur="validateField"
+      @blur="validateField('name', $event)"
+      @input="validateField('name', $event)"
     />
 
     <FormInput
@@ -27,7 +28,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       v-model="form.email"
       :error="errors.email ? 'errors.email' : undefined"
       required
-      @blur="validateField"
+      @blur="validateField('email', $event)"
+      @input="validateField('email', $event)"
     />
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -38,7 +40,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
         v-model="form.password"
         :error="errors.password ? 'errors.password' : undefined"
         required
-        @blur="validateField"
+        @blur="validateField('password', $event)"
+        @input="validateField('password', $event)"
       />
 
       <FormInput
@@ -48,7 +51,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
         v-model="form.confirmPassword"
         :error="errors.confirmPassword ? 'errors.confirmPassword' : undefined"
         required
-        @blur="validateField"
+        @blur="validateField('confirmPassword', $event)"
+        @input="validateField('confirmPassword', $event)"
       />
     </div>
 
@@ -59,7 +63,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       v-model="form.dob"
       :error="errors.dob ? 'errors.dob' : undefined"
       required
-      @blur="validateField"
+      @blur="validateField('dob', $event)"
+      @input="validateField('dob', $event)"
     />
 
     <FormSelect
@@ -74,7 +79,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
         { value: 'other', label: 'form.serviceOptions.other' }
       ]"
       required
-      @blur="validateField"
+      @blur="validateField('service', $event)"
+      @input="validateField('service', $event)"
     />
 
     <FormInput
@@ -83,7 +89,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       label="form.otherService"
       v-model="form.otherService"
       :error="errors.otherService ? 'errors.otherService' : undefined"
-      @blur="validateField"
+      @blur="validateField('otherService', $event)"
+      @input="validateField('otherService', $event)"
       required
     />
 
@@ -93,7 +100,8 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       v-model="form.terms"
       :error="errors.terms ? 'errors.terms' : undefined"
       link="/terms"
-      @blur="validateField"
+      @blur="validateField('terms', $event)"
+      @input="validateField('terms', $event)"
     />
 
     <FormButton type="submit" label="form.submit" />

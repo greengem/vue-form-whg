@@ -114,9 +114,13 @@ export function useForm() {
   }
 
   // Function to validate a specific field
-  const validateField = (field: keyof FormState) => {
+  const validateField = (field: keyof FormState, event?: Event) => {
     if (validationRules[field]) {
       const { validator, message } = validationRules[field]
+      if (event && event.type === 'input') {
+        // Skip validation on input if field is already valid
+        if (errors[field] === '') return
+      }
       errors[field] = validator(form[field], form) ? '' : message
     }
   }
