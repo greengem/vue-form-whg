@@ -56,7 +56,13 @@ const handleBlur = () => {
       <input :type="type" :id="id" v-model="model" @blur="handleBlur" :class="checkboxClass" />
       <FormLabel :for="id" class="flex items-center gap-x-1 !mb-0">
         <span>{{ $t(label) }}</span>
-        <router-link v-if="link" :to="link" target="_blank" class="text-blue-500">
+        <router-link
+          v-if="link"
+          :to="link"
+          target="_blank"
+          class="text-blue-500"
+          aria-label="Link to Terms and Conditions"
+        >
           <v-icon name="fa-external-link-alt" scale="0.8" />
         </router-link>
       </FormLabel>
