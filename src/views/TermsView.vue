@@ -9,6 +9,6 @@ const { t } = useI18n()
 <template>
   <FormWrapper>
     <FormHeader>{{ t('terms.title') }}</FormHeader>
-    <p class="mb-5">{{ t('terms.welcomeMessage') }}</p>
+    <p class="mb-5 text-slate-900 dark:text-white">{{ t('terms.welcomeMessage') }}</p>
   </FormWrapper>
 </template>

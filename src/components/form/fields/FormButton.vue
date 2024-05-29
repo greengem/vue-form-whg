@@ -13,7 +13,7 @@ const props = defineProps({
   },
   class: {
     type: String,
-    default: 'py-2 px-4 bg-slate-700 rounded-md shadow-md text-slate-50' // Default classes for the button
+    default: 'py-2 px-4 bg-slate-700 hover:bg-slate-500 rounded-md shadow-md text-slate-50' // Default classes for the button
   }
 })
 
