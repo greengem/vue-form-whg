@@ -76,8 +76,8 @@ export function useForm() {
       message: t('errors.password')
     },
     confirmPassword: {
-      // Confirm password must match the password field
-      validator: (value, form) => value === form.password,
+      // Confirm password must not be empty and must match the password field
+      validator: (value, form) => value !== '' && value === form.password,
       message: t('errors.confirmPassword')
     },
     dob: {
