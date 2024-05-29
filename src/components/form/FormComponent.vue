@@ -17,7 +17,6 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       v-model="form.name"
       :error="errors.name ? 'errors.name' : undefined"
       required
-      autofocus
       @blur="validateField"
     />
 

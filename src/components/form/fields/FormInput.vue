@@ -44,7 +44,7 @@ const { t } = useI18n()
 
 // Defining a class string for the input element
 const inputClass =
-  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 dark:text-slate-100 shadow-md ring-1 ring-slate-300 dark:ring-slate-700'
+  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 dark:text-slate-100 shadow-md ring-1 ring-slate-300 dark:ring-slate-700  appearance-none'
 
 // Creating a computed property for the error message, translating it if an error exists
 const computedError = computed(() => (props.error ? t(props.error) : null))
