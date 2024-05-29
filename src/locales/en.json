@@ -26,5 +26,10 @@
     "otherService": "Please specify the service (at least 2 characters).",
     "terms": "You must agree to the terms and conditions."
   },
-  "successMessage": "Form submitted successfully!"
+  "successMessage": "Form submitted successfully!",
+  "terms": {
+    "title": "Terms",
+    "welcomeMessage": "Welcome to our website! This is an example terms and conditions page.",
+    "returnToForm": "Return to form"
+  }
 }

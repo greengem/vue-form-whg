@@ -26,5 +26,10 @@
     "otherService": "Por favor, especifique el servicio (al menos 2 caracteres).",
     "terms": "Debe aceptar los términos y condiciones."
   },
-  "successMessage": "¡Formulario enviado con éxito!"
+  "successMessage": "¡Formulario enviado con éxito!",
+  "terms": {
+    "title": "Términos",
+    "welcomeMessage": "¡Bienvenido a nuestro sitio web! Esta es una página de términos y condiciones de ejemplo.",
+    "returnToForm": "Volver al formulario"
+  }
 }
