@@ -30,25 +30,27 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       @blur="validateField"
     />
 
-    <FormInput
-      id="password"
-      label="form.password"
-      type="password"
-      v-model="form.password"
-      :error="errors.password ? 'errors.password' : undefined"
-      required
-      @blur="validateField"
-    />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <FormInput
+        id="password"
+        label="form.password"
+        type="password"
+        v-model="form.password"
+        :error="errors.password ? 'errors.password' : undefined"
+        required
+        @blur="validateField"
+      />
 
-    <FormInput
-      id="confirmPassword"
-      label="form.confirmPassword"
-      type="password"
-      v-model="form.confirmPassword"
-      :error="errors.confirmPassword ? 'errors.confirmPassword' : undefined"
-      required
-      @blur="validateField"
-    />
+      <FormInput
+        id="confirmPassword"
+        label="form.confirmPassword"
+        type="password"
+        v-model="form.confirmPassword"
+        :error="errors.confirmPassword ? 'errors.confirmPassword' : undefined"
+        required
+        @blur="validateField"
+      />
+    </div>
 
     <FormInput
       id="dob"
