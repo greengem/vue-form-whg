@@ -6,7 +6,7 @@ import FormComponent from '@/components/form/FormComponent.vue'
 
 <template>
   <FormWrapper>
-    <FormHeader />
+    <FormHeader>{{ $t('form.formTitle') }}</FormHeader>
     <FormComponent />
   </FormWrapper>
 </template>
