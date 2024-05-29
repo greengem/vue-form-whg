@@ -31,7 +31,7 @@ const { t } = useI18n()
 
 // Defining a class string for the select element
 const baseClass =
-  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 dark:text-slate-100 shadow-md appearance-none'
+  'text-sm w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 dark:text-slate-100 shadow-md appearance-none'
 
 // Creating a computed property for the select element classes
 const selectClass = computed(() => ({
@@ -39,7 +39,7 @@ const selectClass = computed(() => ({
   'ring-1': true,
   'ring-red-400 dark:ring-red-600': props.error,
   'ring-green-400 dark:ring-green-600': !props.error && model,
-  'ring-slate-400 dark:ring-slate-600': !props.error && !model.value
+  'ring-slate-200 dark:ring-slate-600': !props.error && !model.value
 }))
 
 // Creating a computed property for the error message, translating it if an error exists

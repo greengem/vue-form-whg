@@ -47,7 +47,7 @@ const isTouched = ref(false)
 
 // Defining a class string for the input element
 const baseClass =
-  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-red-500 shadow-md appearance-none focus:outline-none'
+  'text-sm w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-red-500 shadow-md appearance-none focus:outline-none'
 
 // Creating a computed property for the input element classes
 const inputClass = computed(() => ({
@@ -55,7 +55,7 @@ const inputClass = computed(() => ({
   'ring-1': true,
   'ring-red-400 dark:ring-red-600': isTouched.value && props.error,
   'ring-green-400 dark:ring-green-600': isTouched.value && !props.error && model,
-  'ring-slate-400 dark:ring-slate-600': !isTouched.value || (!props.error && !model.value)
+  'ring-slate-200 dark:ring-slate-600': !isTouched.value || (!props.error && !model.value)
 }))
 
 // Creating a computed property for the error message, translating it if an error exists
