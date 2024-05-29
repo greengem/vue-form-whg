@@ -126,6 +126,7 @@ describe('FormComponent', () => {
     await wrapper.find('input#name').setValue('John Doe')
     await wrapper.find('input#email').setValue('john.doe@example.com')
     await wrapper.find('input#password').setValue('password1')
+    await wrapper.find('input#confirmPassword').setValue('password1') // Add this line
     await wrapper.find('input#dob').setValue('2000-01-01')
     await wrapper.find('select#service').setValue('webDevelopment')
     await wrapper.find('input#terms').setChecked()
@@ -135,6 +136,19 @@ describe('FormComponent', () => {
     // Check that the success message is displayed
     expect(wrapper.find('.text-green-500').exists()).toBe(true)
     expect(wrapper.find('.text-green-500').text()).toBe(en.successMessage)
+  })
+
+  // Test to validate that passwords must match
+  it('shows error message when passwords do not match', async () => {
+    const passwordInput = wrapper.find('input#password')
+    const confirmPasswordInput = wrapper.find('input#confirmPassword')
+
+    await passwordInput.setValue('password1')
+    await confirmPasswordInput.setValue('differentpassword')
+    await confirmPasswordInput.trigger('blur')
+
+    // Check that the error message is displayed
+    expect(wrapper.text()).toContain(en.errors.confirmPassword)
   })
 
   // Test to switch the language to Spanish and validate labels and error messages
