@@ -71,3 +71,10 @@ const handleBlur = () => {
     <FormError :error="computedError" />
   </FormFieldWrapper>
 </template>
+
+<style scoped>
+/* Fix for the shrunken height issue in iOS */
+input[type='date']::-webkit-date-and-time-value {
+  height: 1.5em;
+}
+</style>
