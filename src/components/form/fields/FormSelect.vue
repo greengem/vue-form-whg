@@ -30,8 +30,17 @@ const emit = defineEmits(['blur'])
 const { t } = useI18n()
 
 // Defining a class string for the select element
-const selectClass =
-  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 dark:text-slate-100 shadow-md ring-1 ring-slate-300 dark:ring-slate-600 appearance-none'
+const baseClass =
+  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 dark:text-slate-100 shadow-md appearance-none'
+
+// Creating a computed property for the select element classes
+const selectClass = computed(() => ({
+  [baseClass]: true,
+  'ring-1': true,
+  'ring-red-400 dark:ring-red-600': props.error,
+  'ring-green-400 dark:ring-green-600': !props.error && model,
+  'ring-slate-400 dark:ring-slate-600': !props.error && !model.value
+}))
 
 // Creating a computed property for the error message, translating it if an error exists
 const computedError = computed(() => (props.error ? t(props.error) : null))
@@ -65,3 +74,10 @@ const handleBlur = () => {
     <FormError :error="computedError" />
   </FormFieldWrapper>
 </template>
+
+<style scoped>
+/* Fix for the shrunken height issue in iOS */
+select::-webkit-date-and-time-value {
+  height: 1.5em;
+}
+</style>
