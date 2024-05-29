@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FormFieldWrapper from '@/components/form/FormFieldWrapper.vue'
 import FormLabel from '@/components/form/FormLabel.vue'
@@ -42,17 +42,20 @@ const emit = defineEmits(['blur'])
 // Using the i18n plugin to get the translation function
 const { t } = useI18n()
 
+// Track if the input has been touched
+const isTouched = ref(false)
+
 // Defining a class string for the input element
 const baseClass =
-  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-red-500 shadow-md appearance-none'
+  'text-sm w-full px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-red-500 shadow-md appearance-none focus:outline-none'
 
 // Creating a computed property for the input element classes
 const inputClass = computed(() => ({
   [baseClass]: true,
   'ring-1': true,
-  'ring-red-400 dark:ring-red-600': props.error,
-  'ring-green-400 dark:ring-green-600': !props.error && model,
-  'ring-slate-400 dark:ring-slate-600': !props.error && !model.value
+  'ring-red-400 dark:ring-red-600': isTouched.value && props.error,
+  'ring-green-400 dark:ring-green-600': isTouched.value && !props.error && model,
+  'ring-slate-400 dark:ring-slate-600': !isTouched.value || (!props.error && !model.value)
 }))
 
 // Creating a computed property for the error message, translating it if an error exists
@@ -60,6 +63,7 @@ const computedError = computed(() => (props.error ? t(props.error) : null))
 
 // Defining a handler function for the 'blur' event
 const handleBlur = () => {
+  isTouched.value = true
   emit('blur', props.id) // Emitting the 'blur' event with the input's id
 }
 </script>
