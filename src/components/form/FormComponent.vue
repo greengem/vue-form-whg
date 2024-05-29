@@ -41,6 +41,16 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
     />
 
     <FormInput
+      id="confirmPassword"
+      label="form.confirmPassword"
+      type="password"
+      v-model="form.confirmPassword"
+      :error="errors.confirmPassword ? 'errors.confirmPassword' : undefined"
+      required
+      @blur="validateField"
+    />
+
+    <FormInput
       id="dob"
       label="form.dob"
       type="date"
@@ -72,6 +82,7 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       v-model="form.otherService"
       :error="errors.otherService ? 'errors.otherService' : undefined"
       @blur="validateField"
+      required
     />
 
     <FormCheckbox
