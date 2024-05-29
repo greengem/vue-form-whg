@@ -28,6 +28,10 @@ This project is a dynamic form built with Vue.js that includes validation, progr
    ```bash
    npm install
    ```
+3. (Optional) Install Playwright to run e2e test
+   ```bash
+   npx playwright install
+   ```
 
 ### Running the Project
 
@@ -47,6 +51,7 @@ This project is a dynamic form built with Vue.js that includes validation, progr
    ```bash
    npm run test:e2e
    ```
+   Note: Playwright needs to be installed, see installation section of this document.
 
 ## Usage
 
