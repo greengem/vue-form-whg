@@ -123,8 +123,8 @@ describe('FormComponent', () => {
 
       await wrapper.find('form').trigger('submit.prevent')
 
-      expect(wrapper.find('.text-green-500').exists()).toBe(true)
-      expect(wrapper.find('.text-green-500').text()).toBe(en.successMessage)
+      expect(wrapper.find('#form-success-message').exists()).toBe(true)
+      expect(wrapper.find('#form-success-message').text()).toBe(en.successMessage)
     })
 
     it('shows error message when passwords do not match', async () => {
