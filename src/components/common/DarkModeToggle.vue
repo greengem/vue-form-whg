@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center gap-2">
+  <div class="flex items-center justify-center gap-2 pt-5">
     <button
       :class="[
         'bg-slate-300 dark:bg-slate-700 rounded-full h-8 w-8 transition-colors duration-300 ease-in-out',
