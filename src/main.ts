@@ -10,7 +10,17 @@ import ja from './locales/ja.json'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
 import { FaExternalLinkAlt, FaSun, FaMoon, FaAdjust } from 'oh-vue-icons/icons'
 
-const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en' // Get the preferred language from localStorage
+// Function to get browser's preferred language
+function getBrowserLanguage() {
+  const browserLanguages = navigator.languages || [navigator.language]
+  const supportedLanguages = ['en', 'es', 'ja']
+  // Find the first supported language that matches browser preference
+  const browserLanguage =
+    browserLanguages.find((lang) => supportedLanguages.includes(lang.split('-')[0])) || 'en'
+  return browserLanguage.split('-')[0]
+}
+
+const preferredLanguage = localStorage.getItem('preferredLanguage') || getBrowserLanguage() // Get the preferred language from localStorage or browser preference
 
 // Configure i18n
 const i18n = createI18n({
