@@ -1,6 +1,7 @@
 <template>
   <div class="flex items-center justify-center gap-2 pt-5">
     <button
+      aria-label="Enable Light Mode"
       :class="[
         'bg-slate-300 dark:bg-slate-700 rounded-full h-8 w-8 transition-colors duration-300 ease-in-out',
         activeClass('light')
@@ -10,6 +11,7 @@
       <v-icon name="fa-sun" />
     </button>
     <button
+      aria-label="Enable Dark Mode"
       :class="[
         'bg-slate-300 dark:bg-slate-700 rounded-full h-8 w-8 transition-colors duration-300 ease-in-out',
         activeClass('dark')
@@ -19,6 +21,7 @@
       <v-icon name="fa-moon" />
     </button>
     <button
+      aria-label="Enable System Theme Mode"
       :class="[
         'bg-slate-300 dark:bg-slate-700 rounded-full h-8 w-8 transition-colors duration-300 ease-in-out',
         activeClass('system')
