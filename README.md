@@ -6,6 +6,10 @@
 
 This project is a dynamic form built with Vue.js that includes validation, progressive disclosure, and internationalization (i18n). The form is designed to capture user information with various input types and enforced validation rules. Additionally, it supports responsive design, dark mode, and includes comprehensive testing.
 
+## Live Demo
+
+[Check out the live demo here](https://vue-form-whg.vercel.app)
+
 ## Setup Instructions
 
 ### Prerequisites
