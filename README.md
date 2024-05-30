@@ -100,7 +100,8 @@ This project is a dynamic form built with Vue.js that includes validation, progr
 ### Internationalization (i18n)
 
 - Implemented using `vue-i18n` with support for English, Spanish, and Japanese.
-- A language switcher component allows dynamic language changes, persisted in local storage.
+- The initial language setting is based on the user's browser preferences, falling back to English if no preference is stored in local storage.
+- A language switcher component allows dynamic language changes, which are persisted in local storage for subsequent visits.
 
 ## About the `useForm` Composable
 
