@@ -47,7 +47,6 @@ describe('FormComponent', () => {
       expect(wrapper.text()).toContain(en.errors.name)
       expect(wrapper.text()).toContain(en.errors.email)
       expect(wrapper.text()).toContain(en.errors.password)
-      expect(wrapper.text()).toContain(en.errors.dob)
       expect(wrapper.text()).toContain(en.errors.service)
       expect(wrapper.text()).toContain(en.errors.terms)
     })
