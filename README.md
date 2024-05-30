@@ -1,10 +1,6 @@
 # WHG Vue Technical Test
 
-<p float="left">
-  <img src="public/screenshots/desktop-dark.webp" width="200" />
-  <img src="public/screenshots/desktop-light.webp" width="200" /> 
-  <img src="public/screenshots/mobile.webp" width="200" /> 
-</p>
+![Desktop Dark Screenshot](public/screenshots/desktop-dark.webp)
 
 ## Project Overview
 
@@ -102,6 +98,63 @@ This project is a dynamic form built with Vue.js that includes validation, progr
 - Implemented using `vue-i18n` with support for English, Spanish, and Japanese.
 - A language switcher component allows dynamic language changes, persisted in local storage.
 
+## About the `useForm` Composable
+
+The `useForm` composable is central to the form handling logic in this project, demonstrating an advanced understanding of Vue's composition API and reactive programming principles. Here's a breakdown of its key features and benefits:
+
+### Design Principles
+
+- **Reactivity and Composition API**: Utilizes Vue's reactive system and composition functions to encapsulate and manage form state and validation logic efficiently.
+- **Custom Validation Framework**: Implements a flexible validation system that can easily be extended or modified to fit different form requirements or validation rules.
+
+### Features
+
+- **Dynamic Error Handling**: The composable dynamically assigns and clears error messages based on custom validation rules defined for each form field. This ensures that users receive immediate feedback on their input, improving the user experience.
+- **Internationalization Support**: Error messages are internationalized using `vue-i18n`, allowing for easy localization of the form into multiple languages.
+- **Form State Management**: Manages the state of multiple form fields with a clear structure, making it easy to track changes and the current status of the form.
+- **Scalability**: Designed to be easily extendable for additional form fields or different types of inputs without significant modifications to the existing structure.
+
+### Code Snippet
+
+Here is a brief look at how the `useForm` composable is structured:
+
+```typescript
+export function useForm() {
+  const form = reactive<FormState>({ ... });
+  const errors = reactive<ErrorState>({ ... });
+  const isSuccess = ref(false);
+
+  // Validation logic and form handling functions
+}
+```
+
+### Validation Strategy
+
+- **Field-Level Validation**: Each input field is validated independently, allowing specific feedback per field and minimizing the user's error correction efforts.
+- **Form-Wide Validation**: Before submission, the entire form is validated to ensure all inputs meet the required standards, safeguarding against partial or malformed submissions.
+
+### Usage
+
+To use this composable, simply import it into a Vue component, and bind it to the template. It handles all aspects of form state, including input validation, error message display, and submission state management.
+
+### Integration Example
+
+```vue
+<template>
+  <form @submit.prevent="handleSubmit">
+    <input v-model="form.name" @blur="validateField('name')" />
+    <span>{{ errors.name }}</span>
+    <!-- Repeat for other fields -->
+  </form>
+</template>
+
+<script setup>
+import { useForm } from '@/composables/useForm'
+
+const { form, errors, validateField, handleSubmit } = useForm()
+</script>
+```
+
 ## Project Structure
 
 ### Important Files
@@ -149,3 +202,6 @@ If given more time, I would like to implement the following features:
 ## Conclusion
 
 This project demonstrates the use of Vue.js for building a dynamic, validated, and internationalized form. It showcases key Vue.js features and adheres to modern web development practices, making it a robust solution for capturing user information.
+
+![Desktop Light Screenshot](public/screenshots/desktop-light.webp)
+![Mobile Screenshot](public/screenshots/mobile.webp)
