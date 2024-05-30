@@ -1,6 +1,8 @@
 <template>
   <div class="locale-changer relative">
     <select
+      id="language-select"
+      name="language"
       v-model="selectedLocale"
       @change="changeLocale"
       aria-label="Language selection"
