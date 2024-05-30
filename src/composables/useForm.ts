@@ -81,11 +81,12 @@ export function useForm() {
       message: t('errors.confirmPassword')
     },
     dob: {
-      // Date of birth must be a valid past date
+      // Date of birth must be a valid past date if provided
       validator: (value) => {
+        if (!value) return true // If no value is provided, it's valid
         const dobDate = new Date(value)
         const currentDate = new Date()
-        return value && dobDate < currentDate
+        return dobDate < currentDate // Check if the provided date is in the past
       },
       message: t('errors.dob')
     },

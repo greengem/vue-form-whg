@@ -62,7 +62,6 @@ const { form, errors, isSuccess, handleSubmit, validateField } = useForm()
       type="date"
       v-model="form.dob"
       :error="errors.dob ? 'errors.dob' : undefined"
-      required
       @blur="validateField('dob', $event)"
       @input="validateField('dob', $event)"
     />
